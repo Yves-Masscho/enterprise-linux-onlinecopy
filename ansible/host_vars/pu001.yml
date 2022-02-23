@@ -1,0 +1,41 @@
+# ansible/host_vars/pu001.yml
+# specifieke vars voor pu001
+---
+
+rhbase_firewall_allow_services:
+  - http
+  - https
+  - ssh
+
+#HTTPD
+httpd_ssl_certificate_key_file: 'ca.key'
+httpd_ssl_certificate_file: 'ca.crt'
+
+#MARIADB
+mariadb_databases:
+  - name: wp_db
+
+mariadb_root_password: IAmRoot
+
+mariadb_users:
+  - name: mr_robot
+    password: Evil_corp
+    priv: 'wp_db.*:ALL'
+
+#WORDPRESS
+wordpress_database: wp_db
+
+wordpress_user: mr_robot
+
+wordpress_password: Evil_corp
+
+#FAIL2BAN
+fail2ban_services:
+ - name: sshd
+   port: 22
+   maxretry: 2
+   bantime: 600 #for testing purposes set to a low number like 10
+ - name: ftp
+   port: 20, 21
+   maxretry: 2
+   bantime: 600 #for testing purposes set to a low number like 10

@@ -1,0 +1,55 @@
+# ansible/host_vars/pr001.yml
+# specifieke vars voor pr001
+---
+rhbase_firewall_allow_services:
+  - dns
+bind_allow_query:
+  - any
+bind_listen_ipv4:
+  - any
+bind_zones:
+  - name: avalon.lan
+    primaries:
+      - 172.16.128.1
+    name_servers:
+      - pr001
+      - pr002
+    mail_servers:
+    - name: pu002
+      preference: 10
+    hosts:
+      - name: pu001
+        ip: 203.0.113.10
+        aliases:
+          - www
+      - name: pu002
+        ip: 203.0.113.20
+        aliases:
+          - mail
+      - name: pr001
+        ip: 172.16.128.1
+        aliases:
+          - ns1
+      - name: pr002
+        ip: 172.16.128.2
+        aliases:
+          - ns2
+      - name: pr003
+        ip: 172.16.128.3
+        aliases:
+          - dhcp
+      - name: pr004
+        ip: 172.16.128.4
+        aliases:
+          - directory
+      - name: pr010
+        ip: 172.16.128.10
+        aliases:
+          - inside
+      - name: pr011
+        ip: 172.16.128.11
+        aliases:
+          - files
+    networks:
+      - '172.16'
+      - '203.0.113'

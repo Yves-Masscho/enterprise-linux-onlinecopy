@@ -1,0 +1,33 @@
+# ansible/host_vars/pr003.yml
+# specifieke vars voor pr003
+---
+rhbase_firewall_allow_services:
+  - dhcp
+
+dhcp_global_domain_name: avalon.lan
+dhcp_global_name_servers:
+  - 172.16.255.254
+dhcp_global_subnet_mask: 255.255.0.0
+
+dhcp_subnets:
+  - ip: 172.16.0.0
+    netmask: 255.255.0.0
+    domain_name_servers:
+      - 172.16.255.254
+    routers: 172.16.255.254
+    pools:
+      - default_lease_time: 14400
+        max_lease_time: 14400
+        range_begin: 172.16.0.2
+        range_end: 172.16.127.254
+        allow: unknown-clients
+      - default_lease_time: 43200
+        max_lease_time: 43200
+        range_begin: 172.16.128.1
+        range_end: 172.16.191.254
+        allow: known-clients
+
+dhcp_hosts:
+  - name: ws0001
+    mac: 'ca:fe:c0:ff:ee:00'
+    ip: 172.16.128.66

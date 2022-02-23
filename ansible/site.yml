@@ -1,0 +1,36 @@
+# site.yml
+---
+- hosts: all
+  become: true
+  roles:
+    - dev-sec.os-hardening #UPDATED OFFLINE GALAXY FILES WITH FILES FROM GIT
+    - bertvv.rh-base
+
+- hosts: pu001 
+  become: true
+  roles:
+    - bertvv.httpd
+    - bertvv.mariadb
+    - bertvv.wordpress
+    - nbigot.ansible-fail2ban
+
+- hosts: pr001
+  become: true
+  roles:
+    - bertvv.bind
+
+- hosts: pr002
+  become: true
+  roles:
+    - bertvv.bind
+
+- hosts: pr003
+  become: true
+  roles:
+    - bertvv.dhcp
+
+- hosts: pr011
+  become: true
+  roles:
+    - bertvv.samba
+    - bertvv.vsftpd #UPDATED OFFLINE GALAXY FILES WITH FILES FROM GIT

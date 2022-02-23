@@ -1,0 +1,17 @@
+# ansible/host_vars/pr002.yml
+# specifieke vars voor pr002
+---
+rhbase_firewall_allow_services:
+  - dns
+bind_allow_query:
+  - any
+bind_listen_ipv4:
+  - any
+
+bind_zones:
+  - name: avalon.lan
+    networks:
+      - '172.16'
+      - '203.0.113'
+    primaries:
+      - 172.16.128.1

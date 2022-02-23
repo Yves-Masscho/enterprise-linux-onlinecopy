@@ -1,0 +1,165 @@
+# ansible/host_vars/pr011.yml
+# specifieke vars voor pr011
+---
+
+rhbase_firewall_allow_services:
+  - samba
+  - ftp
+
+rhbase_users:
+  - name: yves
+    comment: 'Administrator'
+    groups:
+      - wheel
+      - it
+      - public
+    password: '$5$tTd6RBQtPqh2dMWb$4WHIxY0.xcRNLyMM1JeFWRWmwNHve7rcDIcI.oGdCH2'
+    ssh_key: 'ssh-rsa DbGimfy5SJxSO1+FAJdgetucJR1aRXDJU2Yi4aSjiFs'
+  - name: stevenh
+    groups:
+      - management
+      - public
+    password: '$5$Xrbi2B9QoKgO7gzF$F4uxSkm6W6kvhEEZGX3QgKTnqyu8.WhbN3UuWjQbR96'
+  - name: stevenv
+    groups:
+      - technical
+      - public
+    password: '$5$0/6ciSanS4X9M2Ny$TgUQor09IzMI6A7XmXEFfvqwcPkX3DOam/X.fq/6Tx2'
+  - name: leend
+    groups:
+      - technical
+      - public
+    password: '$5$b308afUW6B0qcbQw$LCUOLRfJ7hw6gg6EoWykuZCa8.Prf9lDrNQrXTcn6K7'
+  - name: svena
+    groups:
+      - sales
+      - public
+    password: '$5$JNSXnR3uHaF6NuwU$/r72dE6Q7.yNG3In/WWHjCfbRRZ0U/ELrANqPRKtszB'
+  - name: nehirb
+    groups:
+      - it
+      - public
+    password: '$5$ryF5gR7Mauz9kV8D$k0vMwDkvgNVpxB3g.MpL4bZ5EKYMHp/bDK5zdbluS63'
+  - name: alexanderd
+    groups:
+      - technical
+      - public
+    password: '$5$gNXfsQY0fGJtxryl$jLHUS2Zip.DozLY9Xt/4kwh05j8lDSGn.pHs2Phzek.'
+  - name: krisv
+    groups:
+      - management
+      - public
+    password: '$5$VdbKqZQuvKbZ9Xn0$ysFtgAWkM13JGZVgxoarMuHoKmkBYpwH7eprFBic2e4'
+  - name: benoitp
+    groups:
+      - sales
+      - public
+    password: '$5$uJVyO/6DHeLKf9ju$w1ZQyDuT0C4joIx0/s0IYwEKouIGSE2ngelCgaqsQ43'
+  - name: anc
+    groups:
+      - technical
+      - public
+    password: '$5$KqQBVQxqTHIUr0jG$vat1yraneXQsn07gtvWm1CB9ritoGrIUJCorQza..7D'
+  - name: elenaa
+    groups:
+      - management
+      - public
+    password: '$5$bgmDQXvpqntXo3QQ$peiNwlcZhSeju2MdoYMgMmOaLM6njLAytUmXYwr7RR3'
+  - name: evyt
+    groups:
+      - technical
+      - public
+    password: '$5$yTkT6GL2aJdvVaW9$Ge8DDLtf2bWvLMd3Inaa1OQQLv5CL/HS2ksQhBGRBP0'
+  - name: christophev
+    groups:
+      - it
+      - public
+    password: '$5$35FDBnjbdWgxe5TP$ci2s4Z8IG1uCBDE5sXUlYZ5g3ed7ATp1WRzvOY4TsdA'
+  - name: stefaanv
+    groups:
+      - technical
+      - public
+    password: '$5$wAZAGtMrYEVNqu6j$qp28hnLXF6qT5wDviAMQKtXJWK4uBa1CQ2R8pglEWY2'
+
+samba_netbios_name: files
+
+samba_server_string: 'All your files are belong to us'
+
+samba_map_to_guest: Never
+
+samba_shares_root: /srv/shares
+
+samba_workgroup: avalon
+
+samba_load_printers: false
+
+samba_users:
+  - name: yves
+    password: yves
+  - name: stevenh
+    password: stevenh
+  - name: stevenv
+    password: stevenv
+  - name: leend
+    password: leend
+  - name: svena
+    password: svena
+  - name: nehirb
+    password: nehirb
+  - name: alexanderd
+    password: alexanderd
+  - name: krisv
+    password: krisv
+  - name: benoitp
+    password: benoitp
+  - name: anc
+    password: anc
+  - name: elenaa
+    password: elenaa
+  - name: evyt
+    password: evyt
+  - name: christophev
+    password: christophev
+  - name: stefaanv
+    password: stefaanv
+
+samba_shares:
+  - name: management
+    group: management
+    valid_users: +management
+    write_list: +management
+    directory_mode: 770
+  - name: technical
+    group: technical
+    valid_users: +technical, +public
+    write_list: +technical
+  - name: sales
+    group: sales
+    valid_users: +management, +sales
+    write_list: +sales
+    directory_mode: 770
+  - name: it
+    group: it
+    valid_users: +management, +it
+    write_list: +it
+    directory_mode: 770
+  - name: public
+    group: public
+    valid_users: +public
+    write_list: +public
+
+vsftpd_anonymous_enable: false
+
+vsftpd_local_enable: true
+
+vsftpd_local_root: "/srv/shares"
+
+vsftpd_extra_permissions:
+  - folder: "/srv/shares/sales"
+    entity: "management"
+    etype: "group"
+    permissions: "r-x"
+  - folder: "/srv/shares/it"
+    entity: "management"
+    etype:  "group"
+    permissions: "r-x"

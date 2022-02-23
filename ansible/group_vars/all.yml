@@ -1,0 +1,44 @@
+# group_vars/all.yml
+# Variables visible to all nodes
+---
+
+rhbase_install_packages: # voor alle VMs, specifics niet in all zetten
+  - bind-utils
+  - bash-completion
+  - git
+  - nano
+  - tree
+  - vim-enhanced
+  - wget
+  - rkhunter
+
+rhbase_repo_gpgcheck: true
+
+rhbase_user_groups:
+  - management
+  - technical
+  - sales
+  - it
+  - public
+
+rhbase_users:
+  - name: yves
+    comment: 'Administrator'
+    groups:
+      - wheel
+      - it
+      - public
+    password: '$5$tTd6RBQtPqh2dMWb$4WHIxY0.xcRNLyMM1JeFWRWmwNHve7rcDIcI.oGdCH2'
+    ssh_key: 'ssh-rsa DbGimfy5SJxSO1+FAJdgetucJR1aRXDJU2Yi4aSjiFs'
+
+rhbase_dynamic_motd: yes
+
+#min/maximum password age
+os_auth_pw_max_age: 30
+os_auth_pw_min_age: 3
+
+#the maximum number of authentication attempts, before the account is locked for some time.
+os_auth_retries: 3
+
+#time in seconds that needs to pass, if the account was locked due to too many failed authentication attempts.
+os_auth_lockout_time: 300
